@@ -47,11 +47,12 @@ module.exports = function(sequelize, DataTypes) {
 
   Course.associate = (models) => {
 
-    models.Course.belongsTo(models.User, {
-      foreignKey: 'userId',
+    Course.belongsTo(models.User, {
+      foreignKey: {
+        fieldName: 'userId',
+        
+      },
     });
-
-    //  Course.belongsTo(models.User, { foreignKey: "userId"});
   };
 
   return Course;

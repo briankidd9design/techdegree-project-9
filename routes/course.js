@@ -93,7 +93,8 @@ router.post('/', authenticate, (req, res, next) => {
         } else {
           Course.create(req.body)
             .then (course => {
-              res.location('/api/courses/:id');
+              req.currentUser.id;
+              res.location('/api/courses/${course.id}');
               res.status(201).end();
             })
             //Catch errors
