@@ -52,11 +52,7 @@ module.exports = (req, res, next) => {
        res.json( {message: message} );
      }
    });
- /*} else if (!req.credentials) {
-   const err = new Error('This is a test.');
-   err.status = 401;
-   next(err);*/
-
+   
    //If not enough credentials are entered
   } else {
     const err = new Error('Credentials are insufficient.');

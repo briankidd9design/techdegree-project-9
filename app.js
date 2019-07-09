@@ -56,7 +56,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.set('port', process.env.PORT || 5001);
+app.set('port', process.env.PORT || 5000);
 
 // start listening on port
 const server = app.listen(app.get('port'), () => {
