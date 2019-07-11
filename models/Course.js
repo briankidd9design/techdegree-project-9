@@ -44,9 +44,9 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
     },
   });
-
+  
   Course.associate = (models) => {
-
+//Course" belongs to a single "User
     Course.belongsTo(models.User, {
       foreignKey: {
         fieldName: 'userId',

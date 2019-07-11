@@ -21,6 +21,7 @@ module.exports = (req, res, next) => {
 
   //If user's credentials are valid
   if (credentials) {
+  
     //Find user whose email address matches
     User.findOne({ where: { emailAddress: credentials.name } })
        .then (user => {
@@ -37,7 +38,7 @@ module.exports = (req, res, next) => {
            next();
          } else {
          //If password isn't a match
-         message = `Authentication failure for username: ${user.username}`;
+         message = `Authentication failure for username: ${user.emailAddress}`;
          //Set status code
          res.status(401);
          //Show the message

@@ -8,8 +8,10 @@ const authenticate = require('./auth');
 router.get('/', (req, res, next) => {
 	//Find all courses
 	Course.findAll({
+		//This is all the course data
 			attributes: ['id', 'title', 'description', 'estimatedTime', 'materialsNeeded', 'userId'],
 			include: [{
+				//this is the user data associated with each course
 				model: User,
 				attributes: ['id', 'firstName', 'lastName', 'emailAddress']
 			}]
@@ -39,7 +41,7 @@ router.get('/:id', (req, res, next) => {
 			attributes: ['id', 'firstName', 'lastName', 'emailAddress']
 		}]
 	}).then(course => {
-		//If the course matches
+		//Checks for match for course
 		if (course) {
 			res.status(200);
 			res.json({
@@ -128,7 +130,7 @@ router.put('/:id', authenticate, (req, res, next) => {
 						};
 						course.update(req.body);
 					} else {
-						res.location('/').status(403).json("This is not yours course to update");
+						res.location('/').status(403).json("You do not have permissions to update this course");
 					}
 				}
 			}).then(() => {
@@ -160,7 +162,7 @@ router.delete('/:id', authenticate, (req, res, next) => {
 				//Delete the course
 				return course.destroy();
 			} else{
-        res.location('/').status(403).json("This is not yours course to delete");
+        res.location('/').status(403).json("You do not have permissions to delete this course");
       }
 		}).then(() => {
 			//Return no content and end the request

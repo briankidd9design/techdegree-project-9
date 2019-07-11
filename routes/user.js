@@ -13,7 +13,7 @@ router.get('/', authenticate, (req, res) => {
   //Bring back formatted JSON data
   res.json({
       id: req.currentUser.id,
-      firstName: req.currentUser.emailAddress,
+      firstName: req.currentUser.firstName,
       lastName: req.currentUser.lastName,
       emailAddress: req.currentUser.emailAddress,
   });
@@ -33,7 +33,7 @@ router.post('/', (req, res, next) => {
           //Bad request
           err.status = 400;
           next(err);
-          //If user doesn'e exist
+          //If user doesn't exist
         } else {
           //Create new user object
           const newUser = {
@@ -41,13 +41,14 @@ router.post('/', (req, res, next) => {
             lastName: req.body.lastName,
             emailAddress: req.body.emailAddress,
             password: req.body.password
-          };
+          };//bcrypt will has the new user's password in the database
             newUser.password = bcryptjs.hashSync(newUser.password);
           //Create new user
           User.create(newUser)
             .then (() => {
+              //set the location header
               res.location('/');
-              //End, return no content
+              //create status of no content
               res.status(201).end();
             })
             //Catch errors

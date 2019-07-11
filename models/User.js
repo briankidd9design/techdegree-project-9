@@ -33,6 +33,9 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         notEmpty: {
           msg: "Email is required"
+        },
+        isEmail:{//this makes sure that the email address is formatted properly
+          msg: "Please enter a valid email address"
         }
       }
     },
@@ -42,13 +45,13 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         notEmpty: {
           msg: "Password is required"
-        }
+        },
       }
     },
   });
 
   User.associate = (models) => {
-
+//"User" has many "Courses"
    User.hasMany(models.Course, {
         foreignKey: {
           fieldName: 'userId',
