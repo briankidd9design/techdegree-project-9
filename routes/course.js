@@ -80,7 +80,7 @@ router.post('/', authenticate, (req, res, next) => {
 				next(err);
 			} else {
 				Course.create(req.body).then(course => {
-						res.location('/api/courses/${course.id}');
+						res.location(`/api/courses/${course.id}`);
 						res.status(201).end();
 					})
 					//Catch errors
